@@ -1,14 +1,14 @@
 <div>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Users</h1>
+        <h1 class="h3 mb-0 text-gray-800">Chauffeurs</h1>
     </div>
     <div class="row">
         <div class="card  mx-auto">
             <div>
-                @if (session()->has('user-message'))
+                @if (session()->has('chauffeur-message'))
                     <div class="alert alert-success">
-                        {{ session('user-message') }}
+                        {{ session('chauffeur-message') }}
                     </div>
                 @endif
             </div>
@@ -18,11 +18,11 @@
                         <form>
                             <div class="form-row align-items-center">
                                 <div class="col">
-                                <input type="search" wire:model="search" class="form-control mb-2"
+                                    <input type="search" wire:model="search" class="form-control mb-2"
                                         id="inlineFormInput" placeholder="Search">
                                 </div>
                                 <div class="col" wire:loading>
-                                    <div class="spinner-border" role="status">
+                                    <div class="spinner-border" chauffeur="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                 </div>
@@ -30,8 +30,8 @@
                         </form>
                     </div>
                     <div>
-                        <button wire:click="showUserModal" class="btn btn-primary">
-                            New User
+                        <button wire:click="showChauffeurModal" class="btn btn-primary">
+                            New Chauffeur
                         </button>
                     </div>
                 </div>
@@ -41,24 +41,27 @@
                     <thead>
                         <tr>
                             <th scope="col">#Id</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">CIN</th>
+                            <th scope="col">Address</th>
                             <th scope="col">Manage</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($users as $user)
+                        @forelse ($chauffeurs as $chauffeur)
                             <tr>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->role->name }}</td>
-
+                                <th scope="row">{{ $chauffeur->id }}</th>
+                                <td>{{ $chauffeur->name }}</td>
+                                <td>{{ $chauffeur->first_name }}</td>
+                                <td>{{ $chauffeur->last_name }}</td>
+                                <td>{{ $chauffeur->address }}</td>
+                                <td>{{ $chauffeur->cin }}</td>
                                 <td>
-                                    <button wire:click="showEditModal({{ $user->id }})"
+                                    <button wire:click="showEditModal({{ $chauffeur->id }})"
                                         class="btn btn-success">Edit</button>
-                                    <button wire:click="deleteUser({{ $user->id }})"
+                                    <button wire:click="deleteChauffeur({{ $chauffeur->id }})"
                                         class="btn btn-danger">Delete</button>
                                 </td>
                             </tr>
@@ -71,37 +74,43 @@
                 </table>
             </div>
             <div>
-                {{ $users->links('pagination::bootstrap-4') }}
+                {{ $chauffeurs->links('pagination::bootstrap-4') }}
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal fade" id="chauffeurModal" tabindex="-1" aria-labelledby="chauffeurModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="userModalLabel">Modal title</h5>
+                        @if ($editMode)
+                            <h5 class="modal-title" id="chauffeurModalLabel">Edit Chauffeur</h5>
+                        @else
+                            <h5 class="modal-title" id="chauffeurModalLabel">Create Chauffeur</h5>
+
+                        @endif
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group row">
-                                <label for="username"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                        <div class="form-group row">
+                                <label for="name"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="username" type="text"
+                                    <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror"
-                                        wire:model.defer="username">
+                                        wire:model.defer="name">
 
-                                    @error('username')
+                                    @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+
 
                             <div class="form-group row">
                                 <label for="first_name"
@@ -136,17 +145,16 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="form-group row">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="cin"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('CIN') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror"
-                                        wire:model.defer="email">
+                                    <input id="cin" type="text"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        wire:model.defer="cin">
 
-                                    @error('email')
+                                    @error('cin')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -155,58 +163,33 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="role_id"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                                <label for="address"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
                                 <div class="col-md-6">
-                                    <select wire:model.defer="role_id" class="custom-select">
-                                        <option selected>Choose</option>
+                                    <input id="address" type="text"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        wire:model.defer="address">
 
-                                        @foreach (App\Models\Role::all() as $role)
-                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('role_id')
+                                    @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                            </div>  
+                            </div>
 
-                            
-
-                       
-                            
-
-                            @if (!$editMode)
-                                <div class="form-group row">
-                                    <label for="password"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="password" type="password"
-                                            class="form-control @error('password') is-invalid @enderror"
-                                            wire:model.defer="password">
-
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                
-                            @endif
 
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" wire:click="closeModal">Close</button>
                         @if ($editMode)
-                            <button type="button" class="btn btn-primary" wire:click="updateUser">Update User</button>
+                            <button type="button" class="btn btn-primary" wire:click="updateChauffeur">Update
+                                chauffeur</button>
                         @else
-                            <button type="button" class="btn btn-primary" wire:click="storeUser">Store User</button>
+                            <button type="button" class="btn btn-primary" wire:click="storeChauffeur">Store
+                                chauffeur</button>
                         @endif
                     </div>
                 </div>

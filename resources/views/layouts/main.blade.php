@@ -43,41 +43,75 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('dashboard') }}">
-                    <span>Users Management</span></a>
+                    <span>Employee Management</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Pages Collapse Menu -->
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSystem"
-                    aria-expanded="true" aria-controls="collapseSystem">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
+                    aria-expanded="true" aria-controls="collapseEmployee">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Users</span>
+                    <span>Employees</span>
                 </a>
-                <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseEmployee" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('users.index') }}">Users list</a>
+                        <a class="collapse-item" href="{{ route('employees.index') }}">Employees list</a>
                     </div>
                 </div>
             </li>
-            <!-- Divider -->
+            
+           
+
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
-                    aria-expanded="true" aria-controls="collapseUser">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseChauffeur"
+                    aria-expanded="true" aria-controls="collapseChauffeur">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Roles</span>
+                    <span>Chauffeurs</span>
                 </a>
-                <div id="collapseUser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseChauffeur" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('roles.index') }}">Roles list</a>
+                        <a class="collapse-item" href="{{ route('chauffeurs.index') }}">Chauffeurs list</a>
                     </div>
                 </div>
             </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVehicule"
+                    aria-expanded="true" aria-controls="collapseVehicule">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Vehicules</span>
+                </a>
+                <div id="collapseVehicule" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('vehicules.index') }}">Vehicules list</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoute"
+                    aria-expanded="true" aria-controls="collapseRoute">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Routes</span>
+                </a>
+                <div id="collapseRoute" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('routes.index') }}">Routes list</a>
+                    </div>
+                </div>
+            </li>
+            
+
+
         </ul>
         <!-- End of Sidebar -->
 
@@ -139,7 +173,6 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
             </footer>

@@ -11,7 +11,7 @@
                         </div>
                     @endif
 
-                    {{ __('Welcome to the Users Management') }}
+                    {{ __('Welcome to the Employee Management') }}
                 </div>
             </div>
         </div>

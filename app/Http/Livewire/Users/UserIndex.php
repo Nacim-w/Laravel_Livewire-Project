@@ -14,20 +14,20 @@ class UserIndex extends Component
     
     public $search = '';
     public $username;
-    public $firstName;
-    public $lastName;
+    public $first_name;
+    public $last_name;
     public $email;
     public $password;
     public $userId;
-    public $roleId;
+    public $role_id;
     public $editMode =false;
     protected $rules = [
         'username' => 'required',
-        'firstName' => 'required',
-        'lastName' => 'required',
+        'first_name' => 'required',
+        'last_name' => 'required',
         'password' => 'required',
         'email' => 'required|email',
-        'roleId' => 'required',
+        'role_id' => 'required',
     ];
     public function storeUser()
     {
@@ -35,11 +35,11 @@ class UserIndex extends Component
 
         User::create([
            'username' =>  $this->username,
-           'first_name' =>  $this->firstName,
-           'last_name' =>  $this->lastName,
+           'first_name' =>  $this->first_name,
+           'last_name' =>  $this->last_name,
            'email' =>  $this->email,
            'password' =>  Hash::make($this->password),
-           'role_id' => $this->roleId,
+           'role_id' => $this->role_id,
 
        ]);
         $this->reset();
@@ -67,10 +67,10 @@ class UserIndex extends Component
     {
         $user = User::find($this->userId);
         $this->username = $user->username;
-        $this->firstName = $user->first_name;
-        $this->lastName = $user->last_name;
+        $this->first_name = $user->first_name;
+        $this->last_name = $user->last_name;
         $this->email = $user->email;
-        $this->roleId = $user->role_id;
+        $this->role_id = $user->role_id;
 
     }
 
@@ -78,10 +78,10 @@ class UserIndex extends Component
     {
         $validated = $this->validate([
         'username' => 'required',
-        'firstName' => 'required',
-        'lastName' => 'required',
+        'first_name' => 'required',
+        'last_name' => 'required',
         'email' => 'required|email',
-        'roleId' => 'required',
+        'role_id' => 'required',
 
         ]);
         $user = User::find($this->userId);

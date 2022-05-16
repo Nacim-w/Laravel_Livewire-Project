@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Role;
 
 use App\Models\Role;
-use App\Models\User;
 use Livewire\Component;
 
 class RoleIndex extends Component

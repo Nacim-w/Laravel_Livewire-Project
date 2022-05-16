@@ -36,6 +36,11 @@ class Access
                 'dashboard',
                 'users.index',
                 'roles.index',
+                'chauffeurs.index',
+                'vehicules.index',
+                'routes.index',
+                'employees.index',
+
             ],
             '3'=>[
                 'dashboard'
